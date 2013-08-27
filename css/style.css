@@ -46,6 +46,12 @@ ul{
   max-width: 610px;
   margin: 0 auto;
 }
+#dialpad.deactive{
+  opacity: .2;
+}
+#dialpad.deactive li:hover{
+  background: #eee;
+}
 #dialpad li{
   font-weight: bold;
   background: #eee;

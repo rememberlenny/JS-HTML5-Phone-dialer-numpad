@@ -7,6 +7,7 @@
   window.updateDisplay,
   window.numberDisplayEl,
   window.dialpadButton = $('div#dialpad li'),
+  window.dialpadCase = $('div#dialpad'),
   window.clearButton = $('#actions .clear'),
   window.numberDisplayEl = $('#numberDisplay input');
 
@@ -45,8 +46,12 @@
     disableDialButton();
   };
 
-  function disableDialButton(){
+  function enableDialButton(){
+    window.dialpadCase.removeClass('deactive');
+  };
 
+  function disableDialButton(){
+    window.dialpadCase.addClass('deactive');
   };
 
   function changeClearIntoHangUp(){
@@ -75,16 +80,19 @@
   };
 
   window.dialpadButton.click(function(){
-    var content = $(this).html();
-    refreshInputArray();
-    window.numberArray.push(content);
-    console.log("Added: " + content);
-    console.log("Array is: " + numberArray);
-    compilePhoneNumber();
-    updateDisplay();
+    if( !$(dialpadCase).hasClass('deactive') ){
+      var content = $(this).html();
+      refreshInputArray();
+      window.numberArray.push(content);
+      console.log("Added: " + content);
+      console.log("Array is: " + numberArray);
+      compilePhoneNumber();
+      updateDisplay();
+    }
   });
 
   $('div#actions li.clear').click(function(){
+    enableDialButton();
     clearPhoneNumber();
     removeReadOnlyInput();
     changeHangUpIntoClear();
