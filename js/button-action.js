@@ -9,6 +9,7 @@
   window.dialpadButton = $('div#dialpad li'),
   window.dialpadCase = $('div#dialpad'),
   window.clearButton = $('#actions .clear'),
+  window.callButton = $('#actions .call'),
   window.numberDisplayEl = $('#numberDisplay input');
 
   function compilePhoneNumber(numberArray){
@@ -43,7 +44,29 @@
 
   function activateInCallInterface(){
     changeClearIntoHangUp();
+    disableCallButton();
     disableDialButton();
+  };
+
+  function disableInCallInterface(){
+    removeReadOnlyInput();
+    enableCallButton();
+  }
+
+  function highlightCallButton(){
+    window.callButton.addClass('higlight');
+  };
+
+  function unhighlightCallButton(){
+    window.callButton.removeClass('higlight');
+  };
+
+  function disableCallButton(){
+    window.callButton.addClass('deactive');
+  };
+
+  function enableCallButton(){
+    window.callButton.removeClass('deactive');
   };
 
   function enableDialButton(){
@@ -56,18 +79,15 @@
 
   function changeClearIntoHangUp(){
     window.clearButton.html('Hang Up');
-    window.clearButton.html('Hang Up');
+    window.clearButton.addClass('hangup');
   };
 
   function changeHangUpIntoClear(){
     if( window.clearButton.html('Hang Up') ){
       window.clearButton.html('Clear');
+      window.clearButton.removeClass('hangup');
     }
   };
-
-  function disableInCallInterface(){
-    removeReadOnlyInput();
-  }
 
   function removeReadOnlyInput(){
     window.numberDisplayEl.removeAttr('readonly');
@@ -88,15 +108,35 @@
       console.log("Array is: " + numberArray);
       compilePhoneNumber();
       updateDisplay();
+      checkDisplayEl();
     }
   });
 
+  function checkDisplayEl(){
+    if( window.numberDisplayEl.val() != "" ){
+      addReadyToClear();
+    } else if ( window.numberDisplayEl.val() == "" ) {
+      removeReadyFromClear();
+    }
+  }
+
+  function addReadyToClear(){
+    window.clearButton.addClass('ready');
+  }
+
+  function removeReadyFromClear(){
+    window.clearButton.removeClass('ready');
+    console.log('Removed ready from clear.');
+  }
+
   $('div#actions li.clear').click(function(){
+    enableCallButton();
     enableDialButton();
     clearPhoneNumber();
     removeReadOnlyInput();
     changeHangUpIntoClear();
     updateDisplay();
+    checkDisplayEl();
   });
 
   $('div#actions li.call').click(function(){

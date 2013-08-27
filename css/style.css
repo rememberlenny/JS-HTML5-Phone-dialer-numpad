@@ -49,7 +49,8 @@ ul{
 #dialpad.deactive{
   opacity: .2;
 }
-#dialpad.deactive li:hover{
+#dialpad.deactive li:hover,
+#actions li.deactive:hover{
   background: #eee;
 }
 #dialpad li{
@@ -63,6 +64,18 @@ ul{
 #actions li{
   background: #efefef;
   opacity: .8;
+}
+#actions li.call.active{
+  background: rgba(0, 255, 0, 0.2);
+}
+#actions li.call.deactive{
+  opacity: .2;
+}
+#actions li.hangup{
+  background: rgba(255, 125, 0, 0.2);
+}
+#actions li.hangup:hover{
+  background: rgba(255, 125, 0, 0.4);
 }
 #actions li:hover{
   background: #ccc;
