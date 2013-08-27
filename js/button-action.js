@@ -2,11 +2,12 @@
 // Write tests
 
 (function ($){
-
   window.numberArray = [],
   window.phoneNumber = '',
   window.updateDisplay,
   window.numberDisplayEl,
+  window.dialpadButton = $('div#dialpad li'),
+  window.clearButton = $('#actions .clear'),
   window.numberDisplayEl = $('#numberDisplay input');
 
   function compilePhoneNumber(numberArray){
@@ -31,11 +32,41 @@
   };
 
   function callNumber(){
-    window.numberDisplayEl.attr('value', 'Calling...');
+    window.numberDisplayEl.val('Calling...');
+    window.numberDisplayEl.attr('readonly','readonly');
+    activateInCallInterface();
     // Need timer interval to animate . . .
     // Trigger  "Hangup"
     // Trigger  "Call timer"
   };
+
+  function activateInCallInterface(){
+    changeClearIntoHangUp();
+    disableDialButton();
+  };
+
+  function disableDialButton(){
+
+  };
+
+  function changeClearIntoHangUp(){
+    window.clearButton.html('Hang Up');
+    window.clearButton.html('Hang Up');
+  };
+
+  function changeHangUpIntoClear(){
+    if( window.clearButton.html('Hang Up') ){
+      window.clearButton.html('Clear');
+    }
+  };
+
+  function disableInCallInterface(){
+    removeReadOnlyInput();
+  }
+
+  function removeReadOnlyInput(){
+    window.numberDisplayEl.removeAttr('readonly');
+  }
 
   function refreshInputArray(){
     console.log('Input Array refreshed.');
@@ -43,7 +74,7 @@
     window.numberArray = this.numberDisplayElContent.split('');
   };
 
-  $('div#dialpad li').click(function(){
+  window.dialpadButton.click(function(){
     var content = $(this).html();
     refreshInputArray();
     window.numberArray.push(content);
@@ -55,6 +86,8 @@
 
   $('div#actions li.clear').click(function(){
     clearPhoneNumber();
+    removeReadOnlyInput();
+    changeHangUpIntoClear();
     updateDisplay();
   });
 
