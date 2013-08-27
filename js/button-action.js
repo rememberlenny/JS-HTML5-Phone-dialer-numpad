@@ -6,6 +6,7 @@
   window.phoneNumber = '',
   window.updateDisplay,
   window.numberDisplayEl,
+  window.inCallModeActive,
   window.dialpadButton = $('div#dialpad li'),
   window.dialpadCase = $('div#dialpad'),
   window.clearButton = $('#actions .clear'),
@@ -35,14 +36,25 @@
 
   function callNumber(){
     window.numberDisplayEl.val('Calling...');
-    window.numberDisplayEl.attr('readonly','readonly');
     activateInCallInterface();
     // Need timer interval to animate . . .
     // Trigger  "Hangup"
     // Trigger  "Call timer"
   };
 
+  function holdNumber(){
+    window.numberDisplayEl.val('On Hold.');
+    changeHoldIntoUnhold();
+  };
 
+  function changeHoldIntoUnhold(){
+    window.skipButton.html('Unhold');
+    window.skipButton.addClass('ready');
+  };
+
+  function changeUnholdIntoHold(){
+    window.skipButton.html('Hold');
+  };
 
   function activateInCallInterface(){
     changeClearIntoHangUp();
@@ -50,12 +62,15 @@
     disableCallButton();
     disableDialButton();
     removeReadyFromCall();
+    enableReadOnlyInput();
+    window.inCallModeActive = true;
   };
 
   function disableInCallInterface(){
     removeReadOnlyInput();
     enableCallButton();
     changeHoldIntoSkip();
+    window.inCallModeActive = false;
   }
 
   function disableCallButton(){
@@ -94,6 +109,10 @@
     }
   };
 
+  function enableReadOnlyInput(){
+    window.numberDisplayEl.attr('readonly','readonly');
+  }
+
   function removeReadOnlyInput(){
     window.numberDisplayEl.removeAttr('readonly');
   }
@@ -112,6 +131,12 @@
       updateDisplay();
       checkDisplayEl();
       saveNumberDisplayEl();
+    }
+  });
+
+  window.skipButton.click(function(){
+    if (window.inCallModeActive == true){
+      holdNumber();
     }
   });
 
@@ -158,7 +183,6 @@
   function displayLastSavedNumberDisplayEl(){
     console.log('Last displayed element value: ' + lastNumberDisplayEl);
   }
-
 
   $('div#actions li.clear').click(function(){
     enableCallButton();

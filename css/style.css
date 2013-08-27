@@ -53,6 +53,12 @@ ul{
 #actions .call.ready:hover{
   background: rgba(0, 255, 0, 0.4);
 }
+#actions .skip.ready{
+  background: rgba(0, 255, 0, 0.2);
+}
+#actions .skip.ready:hover{
+  background: rgba(0, 255, 0, 0.4);
+}
 #actions .clear.ready{
   background: rgba(255, 0, 0, 0.2);
 }
