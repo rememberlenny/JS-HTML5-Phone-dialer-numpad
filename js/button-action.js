@@ -7,6 +7,8 @@
   $('div#dialpad li').click(function(){
     var content = $(this).html();
     numberArray.push(content);
+    console.log("Added: " + content);
+    console.log("Array is: " + numberArray);
     compilePhoneNumber();
     updateDisplay();
   });
