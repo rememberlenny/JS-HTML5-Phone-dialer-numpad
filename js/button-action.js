@@ -2,7 +2,22 @@
 
   window.numberArray = [],
   window.phoneNumber,
+  window.updateDisplay,
   window.numberDisplayEl;
+
+  function compilePhoneNumber(numberArray){
+    if (window.numberArray.length > 1){ 
+      window.phoneNumber = window.numberArray.join('');
+    } else {
+      window.phoneNumber = window.numberArray
+    }
+    return this.phoneNumber;
+  };
+
+  function updateDisplay(phoneNumber){
+    window.numberDisplayEl = $('div#numberDisplay p');
+    window.numberDisplayEl.html(window.phoneNumber);
+  };
 
   $('div#dialpad li').click(function(){
     var content = $(this).html();
@@ -13,17 +28,5 @@
     updateDisplay();
   });
 
-  function compilePhoneNumber(numberArray){
-    if (window.numberArray.length > 1){ 
-      window.phoneNumber = window.numberArray.join('');
-    }
-    // this.phoneNumber = numberArray.join();
-    return window.phoneNumber;
-  };
-
-  function updateDisplay(phoneNumber){
-    numberDisplayEl = $('div#numberDisplay p');
-    numberDisplayEl.html = this.phoneNumber;
-  };
 
 })(jQuery);
