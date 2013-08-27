@@ -80,3 +80,9 @@ ul{
 #actions li:hover{
   background: #ccc;
 }
+#actions li.clear.ready{
+  background: rgba(0, 255, 125, 0.2);
+}
+#actions li.clear.ready:hover{
+  background: rgba(0, 255, 125, 0.4);
+}
