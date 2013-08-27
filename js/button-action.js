@@ -21,5 +21,9 @@
     return window.phoneNumber;
   };
 
+  function updateDisplay(phoneNumber){
+    numberDisplayEl = $('div#numberDisplay p');
+    numberDisplayEl.html = this.phoneNumber;
+  };
 
 })(jQuery);
