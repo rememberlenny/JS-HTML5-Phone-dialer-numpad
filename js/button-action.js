@@ -26,6 +26,10 @@
     console.log('Array is empty.');
   }
 
+  function callNumber(){
+    window.numberDisplayEl.html('Calling...');
+  }
+
   $('div#dialpad li').click(function(){
     var content = $(this).html();
     numberArray.push(content);
@@ -38,6 +42,10 @@
   $('div#actions li.clear').click(function(){
     clearPhoneNumber();
     updateDisplay();
-  })
+  });
+
+  $('div#actions li.call').click(function(){
+    callNumber();
+  });
 
 })(jQuery);

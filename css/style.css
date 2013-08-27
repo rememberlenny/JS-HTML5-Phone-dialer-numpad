@@ -4,25 +4,46 @@ body{
 }
 ul{
   list-style: none;
+  padding-left: 0em;
+  margin: 0em;
 }
-#numberDisplay{
-  height: 1em;
-}
-#dialpad ul{
+
+.button-3{
   text-align: center;
 }
-#dialpad li{
+
+.button-3 li{
   display: inline-block;
   width: 30%;
   height:1em;
   padding-top:1em;
   padding-bottom:1em;
-  background: #eee;
   margin-bottom:1%;
 }
-#dialpad li:hover{
-  background: #ddd;
-}
-#dialpad li:nth-child(3){
+.button-3 li:nth-child(3){
   clear: right;
+}
+#numberDisplay p{
+  height: 1em;
+  text-align: center;
+  margin-top: 1em;
+}
+#numberDisplay p{
+  font-size: 2em;
+  font-weight: 100;
+}
+#dialpad li{
+  font-weight: bold;
+  background: #eee;
+  width: 30%;
+}
+#dialpad li:hover{
+  background: #ccc;
+}
+#actions li{
+  background: #efefef;
+  opacity: .8;
+}
+#actions li:hover{
+  background: #ccc;
 }
