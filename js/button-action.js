@@ -1,3 +1,6 @@
+// Refactor to OO
+// Write tests
+
 (function ($){
 
   window.numberArray = [],
@@ -28,6 +31,9 @@
 
   function callNumber(){
     window.numberDisplayEl.html('Calling...');
+    // Need timer interval to animate . . .
+    // Trigger  "Hangup"
+    // Trigger  "Call timer"
   }
 
   $('div#dialpad li').click(function(){
