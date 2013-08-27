@@ -19,6 +19,13 @@
     window.numberDisplayEl.html(window.phoneNumber);
   };
 
+  function clearPhoneNumber(){
+    window.phoneNumber = '';
+    window.numberArray = [];
+    console.log('Phone Number cleared.');
+    console.log('Array is empty.');
+  }
+
   $('div#dialpad li').click(function(){
     var content = $(this).html();
     numberArray.push(content);
@@ -28,5 +35,9 @@
     updateDisplay();
   });
 
+  $('div#actions li.clear').click(function(){
+    clearPhoneNumber();
+    updateDisplay();
+  })
 
 })(jQuery);

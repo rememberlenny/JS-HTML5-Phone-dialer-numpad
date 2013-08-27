@@ -1,0 +1,28 @@
+body{
+  font-family: "Helvetica Neue";
+  font-weight: 200;
+}
+ul{
+  list-style: none;
+}
+#numberDisplay{
+  height: 1em;
+}
+#dialpad ul{
+  text-align: center;
+}
+#dialpad li{
+  display: inline-block;
+  width: 30%;
+  height:1em;
+  padding-top:1em;
+  padding-bottom:1em;
+  background: #eee;
+  margin-bottom:1%;
+}
+#dialpad li:hover{
+  background: #ddd;
+}
+#dialpad li:nth-child(3){
+  clear: right;
+}
