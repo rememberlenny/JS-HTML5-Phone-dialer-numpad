@@ -1,5 +1,5 @@
-// Refactor to OO
-// Write tests
+// States
+// 
 
 (function ($){
   window.numberArray = [],
@@ -10,6 +10,8 @@
   window.dialpadCase = $('div#dialpad'),
   window.clearButton = $('#actions .clear'),
   window.callButton = $('#actions .call'),
+  window.actionButtons = $('#actions'),
+  window.skipButton = $('#actions .skip'),
   window.numberDisplayEl = $('#numberDisplay input');
 
   function compilePhoneNumber(numberArray){
@@ -29,8 +31,6 @@
     window.numberDisplayEl.val('');
     window.phoneNumber = '';
     window.numberArray = [];
-    console.log('Phone Number cleared.');
-    console.log('Array is empty.');
   };
 
   function callNumber(){
@@ -42,24 +42,21 @@
     // Trigger  "Call timer"
   };
 
+
+
   function activateInCallInterface(){
     changeClearIntoHangUp();
+    changeSkipIntoHold();
     disableCallButton();
     disableDialButton();
+    removeReadyFromCall();
   };
 
   function disableInCallInterface(){
     removeReadOnlyInput();
     enableCallButton();
+    changeHoldIntoSkip();
   }
-
-  function highlightCallButton(){
-    window.callButton.addClass('higlight');
-  };
-
-  function unhighlightCallButton(){
-    window.callButton.removeClass('higlight');
-  };
 
   function disableCallButton(){
     window.callButton.addClass('deactive');
@@ -75,6 +72,14 @@
 
   function disableDialButton(){
     window.dialpadCase.addClass('deactive');
+  };
+
+  function changeSkipIntoHold(){
+    window.skipButton.html('Hold');
+  };
+
+  function changeHoldIntoSkip(){
+    window.skipButton.html('Skip');
   };
 
   function changeClearIntoHangUp(){
@@ -94,7 +99,6 @@
   }
 
   function refreshInputArray(){
-    console.log('Input Array refreshed.');
     this.numberDisplayElContent = window.numberDisplayEl.val(); 
     window.numberArray = this.numberDisplayElContent.split('');
   };
@@ -104,20 +108,39 @@
       var content = $(this).html();
       refreshInputArray();
       window.numberArray.push(content);
-      console.log("Added: " + content);
-      console.log("Array is: " + numberArray);
       compilePhoneNumber();
       updateDisplay();
       checkDisplayEl();
+      saveNumberDisplayEl();
     }
   });
 
   function checkDisplayEl(){
     if( window.numberDisplayEl.val() != "" ){
       addReadyToClear();
+      addReadyToCall();
+      enableActionButtons();
     } else if ( window.numberDisplayEl.val() == "" ) {
       removeReadyFromClear();
+      removeReadyFromCall();
+      disableActionButtons();
     }
+  }
+
+  function disableActionButtons(){
+    window.actionButtons.addClass('deactive');
+  }
+
+  function enableActionButtons(){
+    window.actionButtons.removeClass('deactive');
+  }
+
+  function addReadyToCall(){
+    window.callButton.addClass('ready');
+  }
+
+  function removeReadyFromCall(){
+    window.callButton.removeClass('ready');
   }
 
   function addReadyToClear(){
@@ -126,8 +149,16 @@
 
   function removeReadyFromClear(){
     window.clearButton.removeClass('ready');
-    console.log('Removed ready from clear.');
   }
+
+  function saveNumberDisplayEl(){
+    lastNumberDisplayEl = window.numberDisplayEl.val()
+  }
+
+  function displayLastSavedNumberDisplayEl(){
+    console.log('Last displayed element value: ' + lastNumberDisplayEl);
+  }
+
 
   $('div#actions li.clear').click(function(){
     enableCallButton();
@@ -137,6 +168,7 @@
     changeHangUpIntoClear();
     updateDisplay();
     checkDisplayEl();
+    disableInCallInterface();
   });
 
   $('div#actions li.call').click(function(){

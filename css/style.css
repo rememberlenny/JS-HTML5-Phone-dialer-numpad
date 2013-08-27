@@ -8,6 +8,12 @@ ul{
   margin: 0em;
 }
 
+*{
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+}
+
 .button-3{
   text-align: center;
 }
@@ -40,6 +46,23 @@ ul{
   width: 100%;
   border: 0px;
 }
+
+#actions .call.ready{
+  background: rgba(0, 255, 0, 0.2);
+}
+#actions .call.ready:hover{
+  background: rgba(0, 255, 0, 0.4);
+}
+#actions .clear.ready{
+  background: rgba(255, 0, 0, 0.2);
+}
+#actions .clear.ready:hover{
+  background: rgba(255, 0, 0, 0.4);
+}
+#actions .deactive{
+  opacity: .2;
+}
+
 #dialpad,
 #actions,
 #numberDisplay{
@@ -68,9 +91,6 @@ ul{
 #actions li.call.active{
   background: rgba(0, 255, 0, 0.2);
 }
-#actions li.call.deactive{
-  opacity: .2;
-}
 #actions li.hangup{
   background: rgba(255, 125, 0, 0.2);
 }
@@ -79,10 +99,4 @@ ul{
 }
 #actions li:hover{
   background: #ccc;
-}
-#actions li.clear.ready{
-  background: rgba(0, 255, 125, 0.2);
-}
-#actions li.clear.ready:hover{
-  background: rgba(0, 255, 125, 0.4);
 }
