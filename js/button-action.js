@@ -4,9 +4,10 @@
 (function ($){
 
   window.numberArray = [],
-  window.phoneNumber,
+  window.phoneNumber = '',
   window.updateDisplay,
-  window.numberDisplayEl;
+  window.numberDisplayEl,
+  window.numberDisplayEl = $('#numberDisplay input');
 
   function compilePhoneNumber(numberArray){
     if (window.numberArray.length > 1){ 
@@ -18,27 +19,34 @@
   };
 
   function updateDisplay(phoneNumber){
-    window.numberDisplayEl = $('div#numberDisplay p');
-    window.numberDisplayEl.html(window.phoneNumber);
+    window.numberDisplayEl.val(window.phoneNumber);
   };
 
   function clearPhoneNumber(){
+    window.numberDisplayEl.val('');
     window.phoneNumber = '';
     window.numberArray = [];
     console.log('Phone Number cleared.');
     console.log('Array is empty.');
-  }
+  };
 
   function callNumber(){
-    window.numberDisplayEl.html('Calling...');
+    window.numberDisplayEl.attr('value', 'Calling...');
     // Need timer interval to animate . . .
     // Trigger  "Hangup"
     // Trigger  "Call timer"
-  }
+  };
+
+  function refreshInputArray(){
+    console.log('Input Array refreshed.');
+    this.numberDisplayElContent = window.numberDisplayEl.val(); 
+    window.numberArray = this.numberDisplayElContent.split('');
+  };
 
   $('div#dialpad li').click(function(){
     var content = $(this).html();
-    numberArray.push(content);
+    refreshInputArray();
+    window.numberArray.push(content);
     console.log("Added: " + content);
     console.log("Array is: " + numberArray);
     compilePhoneNumber();

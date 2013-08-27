@@ -14,28 +14,42 @@ ul{
 
 .button-3 li{
   display: inline-block;
-  width: 30%;
+  width: 200px;
+  max-width: 200px;
   height:1em;
   padding-top:1em;
   padding-bottom:1em;
   margin-bottom:1%;
 }
-.button-3 li:nth-child(3){
+.last{
+  clear: left;
+}
+.first{
   clear: right;
 }
-#numberDisplay p{
-  height: 1em;
+#numberDisplay input{
+  height: 2em;
   text-align: center;
+  background: rgba(0, 0, 255, 0.1);
+  padding: .5em 0em;
   margin-top: 1em;
-}
-#numberDisplay p{
+  margin-bottom: 1%;
   font-size: 2em;
+  font-family: "Helvetica Neue";
   font-weight: 100;
+  width: 100%;
+  border: 0px;
+}
+#dialpad,
+#actions,
+#numberDisplay{
+  max-width: 610px;
+  margin: 0 auto;
 }
 #dialpad li{
   font-weight: bold;
   background: #eee;
-  width: 30%;
+  width: 100%;
 }
 #dialpad li:hover{
   background: #ccc;
