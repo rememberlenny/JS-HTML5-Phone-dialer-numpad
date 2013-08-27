@@ -13,5 +13,13 @@
     updateDisplay();
   });
 
+  function compilePhoneNumber(numberArray){
+    if (window.numberArray.length > 1){ 
+      window.phoneNumber = window.numberArray.join('');
+    }
+    // this.phoneNumber = numberArray.join();
+    return window.phoneNumber;
+  };
+
 
 })(jQuery);
